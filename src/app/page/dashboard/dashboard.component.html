@@ -1,0 +1,169 @@
+<div class="flex flex-col min-h-screen bg-gray-100">
+  <header class="bg-slate-900 p-8 flex justify-between">
+    <h1 class="text-xl font-bold">
+      
+    </h1>
+    <div class="relative text-gray-600">
+      <input
+        [(ngModel)]="proveedorId"
+        type="search"
+        name="serch"
+        placeholder="Search"
+        class="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none"
+      />
+      <button
+        type="submit"
+        class="absolute right-0 top-0 mt-3 mr-4"
+        (click)="buscarProveedor()"
+      >
+        <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966"
+          style="enable-background: new 0 0 56.966 56.966" xml:space="preserve" width="512px" height="512px">
+          <path
+            d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+        </svg>
+      </button>
+    </div>
+    <span class="text-gray-700 font-bold"></span>
+  </header>
+
+  <div class="flex flex-1 bg-slate-200 rounded">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white shadow">
+      <div class="flex items-center justify-center h-40 bg-white">
+        <div class="flex items-center">
+          <img src="../../../assets/img-icons/logo.png" alt="">
+        </div>
+      </div>
+      <nav class="mt-4">
+        <ul class="space-y-2">
+          <li (click)="onRoutes('register-proveedor')">
+            <a class="block p-4 hover:bg-gray-300">
+              <i class="fas fa-users text-green-500 mr-2"></i> Registrar Proveedor
+            </a>
+          </li>
+          <li (click)="onRoutes('meat-characteristics')">
+            <a class="block p-4 hover:bg-gray-300">
+              <i class="fas fa-shopping-cart text-yellow-500 mr-2"></i> Registrar características de la carne
+            </a>
+          </li>
+          <li  (click)="onRoutes('calendario')">
+            <a class="block p-4 hover:bg-gray-300">
+              <i class="fas fa-box text-purple-500 mr-2"></i> Calendario
+            </a>
+          </li>
+          <li (click)="onRoutes('control-calidad')">
+            <a class="block p-4 hover:bg-gray-300">
+              <i class="fas fa-chart-line text-red-500 mr-2"></i> Control de calidad
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="flex flex-col flex-1 p-4">
+      <section class="grid grid-cols-4 gap-8">
+        <div class="bg-white p-8 shadow w-52">
+          <img src="../../../assets/img-icons/carniceria.png" alt="">
+        </div>
+
+        <div class="bg-white p-8 shadow w-40">
+          <img src="../../../assets/img-icons/cerdo.png" alt="">
+        </div>
+
+        <div class="bg-white p-8 shadow">
+          <div>
+            <p class="text-sm text-gray-500">Cantidad de registros de proveedores</p>
+            <p class="text-2xl font-medium text-gray-900">{{proveedoresEncontrados.length}}</p>
+          </div>
+          <div class="inline-flex gap-2 rounded bg-red-100 p-1 text-red-600">
+            <i class="fas fa-shopping-cart text-yellow-500"></i>
+          </div>
+        </div>
+
+        <div class="bg-white p-8 shadow">
+          <div>
+            <p class="text-sm text-gray-500">Cantidad de registros de carnes</p>
+            <p class="text-2xl font-medium text-gray-900">{{carneEncontrada.length}}</p>
+          </div>
+          <div class="inline-flex gap-2 rounded bg-red-100 p-1 text-red-600">
+            <i class="fas fa-box text-purple-500"></i>
+          </div>
+        </div>
+
+        <div class="col-span-2 row-span-6 bg-white p-4 shadow">
+          <div [ngStyle]="containerStyle" class="ml-20">
+            <canvas baseChart class="chart" [data]="doughnutChartData" [type]="doughnutChartType"></canvas>
+          </div>
+        </div>
+        <div class="col-span-2 row-span-6 bg-white p-6 shadow">
+          <i class="fas fa-sync-alt" *ngIf="proveedorEncontrado" (click)="actualizarPagina()"></i>
+          <h3 class="text-xl font-bold mb-4">Proveedores</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="header-cell">Nombre</th>
+                <th class="header-cell">Email</th>
+                <th class="header-cell">Teléfono</th>
+                <th class="header-cell">Dirección</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="proveedorEncontrado">
+              <tr>
+                <td>{{ proveedorEncontrado.Nombre }}</td>
+                <td>{{ proveedorEncontrado.Email }}</td>
+                <td>{{ proveedorEncontrado.Telefono }}</td>
+                <td>{{ proveedorEncontrado.Direccion }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="!proveedorEncontrado">
+              <tr *ngFor="let proveedor of proveedoresEncontrados">
+                <div class="flex items-center">
+                  <img src="../../../assets/img-icons/user.png" alt="">
+                  <td>{{ proveedor.Nombre }}</td>
+                </div>
+                <td>{{ proveedor.Email }}</td>
+                <td>{{ proveedor.Telefono }}</td>
+                <td>{{ proveedor.Direccion }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="mt-4 col-span-4">
+        <div class="bg-white p-6 shadow rounded">
+          <h3 class="text-xl font-bold mb-4">Carnes</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-white border border-gray-200">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-white dark:text-black">
+                <tr>
+                  <th scope="col" class="px-6 py-3">Tipo</th>
+                  <th scope="col" class="px-6 py-3">Procedencia</th>
+                  <th scope="col" class="px-6 py-3">Fecha Recepción</th>
+                  <th scope="col" class="px-6 py-3">Nombre de corte</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let carne of carneEncontrada " class="bg-white dark:bg-white">
+                  <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                    <div class="flex items-center">
+                      <img src="../../../assets/img-icons/carne.png" alt="">
+                      {{carne.Tipo}}
+                    </div>
+                  </th>
+                  <td class="px-6 py-4">{{carne.Procedencia}}</td>
+                  <div class="flex items-center">
+                    <img src="../../../assets/img-icons/fecha.png" alt="">
+                    <td class="px-6 py-4">{{carne.FechaRecepcion | fecha }}</td>
+                  </div>
+                  <td class="px-6 py-4">{{carne.nombreDeCorte}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>

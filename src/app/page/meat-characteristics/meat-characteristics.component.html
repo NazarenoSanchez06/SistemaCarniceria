@@ -1,0 +1,78 @@
+<div class="flex justify-center items-center h-screen">
+  <div class="w-2/3 p-8 bg-white rounded shadow-lg">
+    <h1 class="text-2xl font-bold mb-4">Formulario de Registro de Carnes</h1>
+    <div class="mb-4 flex items-center">
+      <i class="fas fa-cutlery text-gray-700 text-xl mr-2"></i>
+      <label class="text-gray-700 text-sm font-bold" for="nombre-corte">Nombre del corte:</label>
+      <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ml-2" 
+        id="nombre-corte" 
+        type="text"
+        placeholder="Ingrese el nombre del corte" 
+        required
+        [(ngModel)]="carnes.nombreDeCorte">
+    </div>
+    <div class="mb-4 flex items-center">
+      <i class="fas fa-drumstick-bite text-gray-700 text-xl mr-2"></i>
+      <label class="text-gray-700 text-sm font-bold" for="tipo-carne">Tipo de carne:</label>
+      <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ml-2"
+        id="tipo-carne" 
+        required
+        [(ngModel)]="carnes.Tipo">
+        <option value="">Seleccione el tipo de carne</option>
+        <option value="carne-res">Carne de res</option>
+        <option value="cerdo">Cerdo</option>
+        <option value="pollo">Pollo</option>
+        <option value="pescado">Pescado</option>
+        <option value="mariscos">Mariscos</option>
+      </select>
+    </div>
+    <div class="mb-4 flex items-center">
+      <i class="fas fa-map-marker-alt text-gray-700 text-xl mr-2"></i>
+      <label class="text-gray-700 text-sm font-bold" for="origen">Origen:</label>
+      <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ml-2"
+        id="origen" 
+        type="text"
+        placeholder="Ingrese el origen de la carne" 
+        required
+        [(ngModel)]="carnes.Procedencia">
+    </div>
+    <div class="mb-4 flex items-center">
+      <i class="fas fa-box-open text-gray-700 text-xl mr-2"></i>
+      <label class="text-gray-700 text-sm font-bold" for="fecha-envasado">Fecha de Recepción:</label>
+      <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ml-2"
+        id="fecha-envasado" 
+        type="date" 
+        required
+        [(ngModel)]="carnes.FechaRecepcion">
+    </div>
+    <div class="mt-6">
+      <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="submit"
+        (click)="registrarCarne()">
+        <i class="fas fa-check mr-2"></i>
+        Registrar
+      </button>
+    </div>
+    <div class="relative" *ngIf="showAlert">
+      <div class="px-4 py-6 bg-green-50 rounded-r-lg flex justify-between items-center w-full border border-l-transparent border-gray-200">
+        <div class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="fill-current text-green-500" viewBox="0 0 16 16" width="20" height="20">
+            <path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"/>
+          </svg>
+          <div class="ml-2 text-sm text-gray-700">Carne registrada correctamente.</div>
+        </div>
+        <button class="ml-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="fill-current text-gray-700" viewBox="0 0 16 16" width="20" height="20">
+            <path fill-rule="evenodd" d="M6 1.75a.75.75 0 0 1 1.5 0V6h4.25a.75.75 0 0 1 0 1.5H7.5v4.25a.75.75 0 0 1-1.5 0V7.5H1.75a.75.75 0 0 1 0-1.5H6V1.75z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="fixed bottom-4 right-4 inline-flex items-center justify-center w-12 h-12 bg-yellow-200 hover:bg-yellow-500 rounded-full text-white text-lg shadow-lg focus:outline-none"
+  routerLink="/dashboard">
+  <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+  </svg>
+</button>

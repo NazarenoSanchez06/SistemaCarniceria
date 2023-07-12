@@ -1,0 +1,49 @@
+<div class="grid grid-cols-2 h-screen">
+  <!-- Columna izquierda - Nombre de la empresa -->
+  <div class="col-span-1 flex flex-col mt-16">
+    <div>
+      <h1 class="text-4xl font-bold text-yellow-500  text-center ml-48 font-family f-name">GRUPO 05</h1>
+      <h1 class="text-4xl font-bold text-yellow-500  text-center ml-48 font-family f-nameCourse">Arquitectura de Software</h1>
+      <!-- Aquí puedes insertar la imagen de la empresa -->
+      <div class="images">
+        <img src="assets/img/shape.png" class="shape">
+        <img src="assets/img/grupo.PNG" class="girl">
+      </div>  
+    </div>
+  </div>
+  
+  
+  <!-- Columna derecha - Formulario de inicio de sesión -->
+<div class="col-span-1 mr-10 mt-64 ml-72 w-96 h-96 shadow  p-6">
+  
+    <h2 class="text-2xl mb-4">Inicio de sesión</h2>
+    <form>
+      <!-- Campos del formulario -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+          Usuario
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               id="username" type="text" placeholder="Ingrese su usuario">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+          Contraseña
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               id="password" type="password" placeholder="Ingrese su contraseña">
+      </div>
+      <div class="flex items-center justify-between">
+        <button class="bg-yellow-300 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="button" (click)="onLogin()">
+          Iniciar sesión
+          </button>
+         <a class="inline-block align-baseline font-bold text-sm text-yellow-400 hover:text-yellow-500"
+           href="#">
+          ¿Olvidó su contraseña?
+        </a>
+      </div>
+    </form>
+  </div>
+
+</div>
